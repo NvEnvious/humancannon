@@ -1,0 +1,93 @@
+
+
+
+
+getgenv().autoBuytnt = false
+getgenv().autoRebirth = false
+
+
+
+
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+
+local Window = Rayfield:CreateWindow({
+	Name = "Human Cannon by Nv",
+	LoadingTitle = "Human Cannon",
+	LoadingSubtitle = "by Nv",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = Farming, -- Create a custom folder for your hub/game
+		FileName = "Big Hub"
+	},
+        Discord = {
+        	Enabled = false,
+        	Invite = "rVeGugG2", -- The Discord invite code, do not include discord.gg/
+        	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+	
+})
+local Tab = Window:CreateTab("Farming", 4483362458)
+
+
+
+
+local Section = Tab:CreateSection("Buy tnt")
+local Toggle = Tab:CreateToggle({
+	Name = "Buy tnt",
+	CurrentValue = false,
+	Flag = "Buy tnt", 
+	Callback = function(Value)
+		getgenv().Buytnt = Value
+        if Value then
+        doBuytnt()
+	end
+end
+})
+
+
+local Section = Tab:CreateSection("Rebirths")
+
+
+
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Rebirth",
+	CurrentValue = false,
+	Flag = "Auto Rebirth", 
+	Callback = function(Value)
+		getgenv().autoRebirth = Value
+        if Value then
+            autoRebirth(rebirthoptions)
+        end
+	end
+})
+
+
+
+
+function doBuytnt()
+    spawn(function()
+        while getgenv().autoTap == true do
+           
+
+            game:GetService("ReplicatedStorage").Remote.Event.Speed:FindFirstChild("[C-S]TryBuySpeed"):FireServer()
+
+
+            wait(0.00001)
+        end 
+    end)
+end
+
+function autoRebirth(i)
+    spawn(function()
+        while getgenv().autoRebirth == true do
+        
+       
+
+            game:GetService("ReplicatedStorage").Remote.Event.Rebirth:FindFirstChild("[C-S]TryBuyRebirth"):FireServer()
+
+
+            wait()
+        end
+    end)
+end
